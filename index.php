@@ -9,25 +9,39 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+                <?php
+                    $query = "SELECT * FROM posts";
+                    $query_post_result = mysqli_query($connection, $query);
+                    if (!$query_post_result) {
+                        die("Query Failed" . mysqli_error($connection));
+                    }
 
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+                    while ($row = mysqli_fetch_assoc($query_post_result)) {
+                        $post_id = $row['post_id'];
+                        $post_title = $row['post_title'];
+                        $post_author = $row['post_author'];
+                        $post_date = $row['post_date'];
+                        $post_image = $row['post_image'];
+                        $post_content = substr($row['post_content'], 0, 300);
+                        ?>
+                        <!-- Display each post -->
+                        <h1 class="page-header">
+                            Page Heading
+                            <small>Secondary Text</small>
+                        </h1>
+                        <h2><a href=""><?php echo $post_title ?></a></h2>
+                        <p class="lead">by <a href=""><?php echo $post_author ?></a></p>
+                        <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
+                        <a href="post_comment.php?p_id="><img class="img-responsive" src="http://placehold.it/900x300" alt=""></a>
+                        <p><?php echo $post_content ?></p>
+                        <a class="btn btn-primary" href="">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <hr>
+                    <?php
+                }
+                    
+                
+                ?>
 
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="#">Blog Post Title</a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 
