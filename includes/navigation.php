@@ -14,15 +14,28 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
+
+                    <?php
+                    $query = "SELECT * FROM category_header";
+                    $query_result = mysqli_query($connection, $query);
+                    if (!$query_result) {
+                        die("Query Failed" . mysqli_error($connection));
+                    }
+                    while ($row = mysqli_fetch_assoc($query_result)) {
+                        $cat_title = $row['cat_title'];
+                        echo "<li><a href='#'>{$cat_title}</a></li>";
+                    }
+
+                    ?>
+
                     <li>
                         <a href="#">Contact</a>
                     </li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="admin">Admin</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
