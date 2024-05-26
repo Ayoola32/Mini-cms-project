@@ -45,3 +45,10 @@ function readAllCategories(){
 }
 
 
+// UPDATE CATEGORIES
+function update_categories(){
+    global $connection;
+    if (isset($_GET['edit'])) {
+        include "includes/categories_update.php";
+   }
+}

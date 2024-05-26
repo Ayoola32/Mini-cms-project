@@ -45,7 +45,9 @@
 
                     <hr>
                     
-                
+                    <?php //UPDATE CATEGORIES
+                       update_categories();
+                    ?>
 
 
                 </div> <!-- Category form -->
@@ -66,7 +68,7 @@
                             ?>
 
 
-                         
+
                         </tbody>
                     </table>
                 </div> 
