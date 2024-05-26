@@ -38,7 +38,7 @@
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
 
-                    <li> <a href="#"><i class="fa fa-fw fa-table"></i> Categories</a></li>
+                    <li> <a href="categories.php"><i class="fa fa-fw fa-table"></i> Categories</a></li>
 
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#post"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>

@@ -16,7 +16,7 @@
                 <ul class="nav navbar-nav">
 
                     <?php
-                    $query = "SELECT * FROM category_header";
+                    $query = "SELECT * FROM category_header LIMIT 3";
                     $query_result = mysqli_query($connection, $query);
                     if (!$query_result) {
                         die("Query Failed" . mysqli_error($connection));
