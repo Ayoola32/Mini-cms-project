@@ -68,7 +68,9 @@
                             ?>
 
 
-
+                            <?php //DELETE CATEGORIES
+                               delete_categories();                               
+                            ?>
                         </tbody>
                     </table>
                 </div> 

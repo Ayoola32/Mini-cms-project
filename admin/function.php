@@ -52,3 +52,23 @@ function update_categories(){
         include "includes/categories_update.php";
    }
 }
+
+
+
+
+// DELETE CATEGORIES
+function delete_categories(){
+    global $connection;
+    if (isset($_GET['delete'])) {
+        $del_cat_id = $_GET['delete'];
+
+        $query = "DELETE FROM category_header WHERE cat_id = '{$del_cat_id}'";
+        $del_query_result = mysqli_query($connection, $query);
+        if (!$del_query_result) {
+            die("Query Failed" . mysqli_error($connection));
+        }
+        header("Location: categories.php");
+    }
+
+}
+
