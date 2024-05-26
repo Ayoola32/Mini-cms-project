@@ -32,7 +32,7 @@
                         <h2><a href=""><?php echo $post_title ?></a></h2>
                         <p class="lead">by <a href=""><?php echo $post_author ?></a></p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
-                        <a href="post_comment.php?p_id="><img class="img-responsive" src="http://placehold.it/900x300" alt=""></a>
+                        <a href="post_comment.php?p_id="><img class="img-responsive" src="images/<?php echo $post_image?>" alt=""></a>
                         <p><?php echo $post_content ?></p>
                         <a class="btn btn-primary" href="">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                         <hr>
