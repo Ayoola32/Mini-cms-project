@@ -67,7 +67,7 @@
                         </ul>
                     </li>
 
-                    <li> <a href="#">Profile</a></li>
+                    <li> <a href="#"><i class="fa fa-fw fa-user"></i>Profile</a></li>
              
                 </ul>
             </div>
