@@ -39,14 +39,6 @@
                             include "includes/post_add.php";
                             break;
 
-
-                        
-                        
-                        // case 'comment_list':
-                        //     include "includes/comment_list.php";
-                        //     break;
-
-
                         
                         default:
                             include "includes/post_view_all.php";
