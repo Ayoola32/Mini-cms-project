@@ -51,7 +51,7 @@
                             echo "<td>$post_comment_count</td>";
                             echo "<td>$post_users</td>";
                             echo "<td><a href=''>View Post</a></td>";
-                            echo "<td><a href=''>Edit</a></td>";
+                            echo "<td><a href='./posts.php?source=post_update'>Edit</a></td>";
                             echo "<td><a href=''>Delete</a></td>";
                         }
                         

@@ -39,6 +39,10 @@
                             include "includes/post_add.php";
                             break;
 
+                        case 'post_update':
+                            include "includes/post_update.php";
+                            break;
+
                         
                         default:
                             include "includes/post_view_all.php";
