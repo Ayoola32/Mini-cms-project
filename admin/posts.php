@@ -43,7 +43,10 @@
                             include "includes/post_update.php";
                             break;
 
-                        
+                        case 'post_delete':
+                            include "includes/post_delete.php";
+                            break;
+
                         default:
                             include "includes/post_view_all.php";
                         break;
