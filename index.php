@@ -10,7 +10,7 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php
-                    $query = "SELECT * FROM posts";
+                    $query = "SELECT * FROM posts ORDER BY post_id DESC ";
                     $query_post_result = mysqli_query($connection, $query);
                     if (!$query_post_result) {
                         die("Query Failed" . mysqli_error($connection));
@@ -33,7 +33,7 @@
                             <h2><a href=""><?php echo $post_title ?></a></h2>
                             <p class="lead">by <a href=""><?php echo $post_author ?></a></p>
                             <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
-                            <a href="post_comment.php?p_id="><img class="img-responsive" src="images/<?php echo $post_image?>" alt=""></a>
+                            <a href=""><img class="img-responsive" src="images/<?php echo $post_image?>" alt=""></a>
                             <p><?php echo $post_content ?></p>
                             <a class="btn btn-primary" href="">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                             <hr>
