@@ -13,9 +13,8 @@
         $post_image         = $_FILES['post_image']['name'];
         $post_image_temp    = $_FILES["post_image"]['tmp_name'];
         move_uploaded_file($post_image_temp, "../images/$post_image");
-    
 
-        if (empty($post_category_id && $post_title && $post_author && $post_content && $post_tags && $post_status && $post_users)) {
+        if (empty($post_category_id) || empty($post_title) || empty($post_author) || empty($post_content) || empty($post_tags) || empty($post_status) || empty($post_users)) {
             echo "<h3 class='text-center'>Field can't be empty</h3>";
         }else{
             // using prepare method write a query to add a new post and save to db and display it back to the admin and also homepage
