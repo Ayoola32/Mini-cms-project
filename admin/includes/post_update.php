@@ -22,6 +22,26 @@
         $post_users = $row['post_users'];
         
     }
+
+    // for displaying the default header categories
+    $query = "SELECT * FROM category_header WHERE cat_id = $post_category_id";
+    $query_result_result = mysqli_query($connection, $query);
+    if (!$connection) {
+        die("Query Failed" . mysqli_error($connection));
+    }
+
+    while ($row = mysqli_fetch_assoc($query_result_result)) {
+        $cat_id = $row['cat_id'];
+        $cat_title = $row['cat_title'];
+    }
+
+
+
+
+    // Query to send the updated version of the post back to the database
+    if (isset($_POST['submit'])) {
+        $post_category_id = $_POST['post_category_id'];
+    }
     
     
     
@@ -34,12 +54,25 @@
 
 <!-- FORM UPDATE -->
 <form action="" method="post" enctype="multipart/form-data">
-    <h2>Edit Post <?php echo $get_post_id;?></h2>
+    <h2>Edit Post: <?php echo $get_post_id;?></h2>
     <div class="form-group">
 
         <label for="">Categories</label><br>
         <select name="post_category_id" id="post_category" class>
-            <option value="<?php echo $post_category_id?>"><?php echo $post_category_id?></option>
+            <option value="<?php echo $cat_id?>"><?php echo $cat_title?></option>
+            <?php
+            $query = "SELECT * FROM category_header";
+            $query_result = mysqli_query($connection, $query);
+            if (!$query_result) {
+                die("Query Failed" . mysqli_error($connection));
+            }
+
+            while ($row = mysqli_fetch_assoc($query_result)) {
+                $cat_id    = $row['cat_id'];
+                $cat_title = $row['cat_title'];
+                echo "<option value='{$cat_id}'>{$cat_title}</option>";
+            }
+            ?>
         </select>
         </div>
 
@@ -54,7 +87,8 @@
     </div>
 
     <div class="form-group">
-        <label for="post_image">Post Image</label>
+        <label for="post_image">Post Image</label><br>
+        <img width="200" src="../images/<?php echo $post_image?>" alt="post_image">
         <input type="file" name="post_image">
     </div>
 
@@ -71,9 +105,14 @@
     <div class="form-group">
         <label for="post_status">Post Status</label><br>
         <select name="post_status" id="" class="control">
-        <option value=<?php echo $post_status?>><?php echo $post_status?></option> <!-- Default -->
-            <option value="published">Draft*</option>
-            <option value="published">Published</option>
+        <option value=<?php echo $post_status?>><?php echo ucwords($post_status)?></option> <!-- Default -->
+            <?php
+            if ($post_status == 'published') {
+                echo "<option value='draft'>Draft</option>";
+            }else{
+                echo "<option value='published'>Published</option>";
+            }
+            ?>
         </select>
     </div>
 
