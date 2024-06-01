@@ -68,7 +68,24 @@
         if (empty($post_category_id) || empty($post_title) || empty($post_author) || empty($post_content) || empty($post_tags) || empty($post_status) || empty($post_users)) {
             echo "<h3 class='text-center'>Field can't be empty</h3>";
         }else{
+            // "UPDATE posts SET "
+            $query = "UPDATE posts SET ";
+            $query .= "post_category_id = '{$post_category_id}', ";
+            $query .= "post_title = '{$post_title}', ";
+            $query .= "post_author = '{$post_author}', ";
+            $query .= "post_image = '{$post_image}', ";
+            $query .= "post_content = '{$post_content}', ";
+            $query .= "post_tags = '{$post_tags}', ";
+            $query .= "post_status = '{$post_status}', ";
+            $query .= "post_users = '{$post_users}' ";
+            $query .= "WHERE post_id = {$get_post_id}";
 
+            $query_result = mysqli_query($connection, $query);
+            if (!$query_result) {
+                die("Query Failed" . mysqli_error($connection));
+            }else{
+            echo $message = "<p class='alert alert-success' role='alert'> <a href='./posts.php'>Edit Other Posts</a></p>";
+            }
         }
         
     }
