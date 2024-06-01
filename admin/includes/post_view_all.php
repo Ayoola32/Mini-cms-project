@@ -39,8 +39,20 @@
                             $post_users = $row['post_users'];
 
                             echo "<tr>";
-                            echo "<td>$post_category_id</td>";
-                            echo "<td>$post_title</td>";
+                            echo "<td>$post_id</td>";
+
+                            // Display Post category title instead of post category id
+                            $query = "SELECT * FROM category_header WHERE cat_id = {$post_category_id}";
+                            $query_result = mysqli_query($connection, $query);
+                            if (!$query_result) {
+                                die("Query Failed " . mysqli_error($connection));
+                            }
+                            while ($row = mysqli_fetch_assoc($query_result)) {
+                                $cat_id = $row['cat_id'];
+                                $cat_title = $row['cat_title'];
+                                echo "<td>$cat_title</td>";
+                            }
+
                             echo "<td>$post_title</td>";
                             echo "<td>$post_author</td>";
                             echo "<td>$post_date</td>";
