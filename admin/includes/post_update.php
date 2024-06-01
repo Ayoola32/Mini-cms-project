@@ -23,7 +23,7 @@
         
     }
 
-    // for displaying the default header categories
+    // For displaying the default header categories
     $query = "SELECT * FROM category_header WHERE cat_id = $post_category_id";
     $query_result_result = mysqli_query($connection, $query);
     if (!$connection) {
@@ -41,12 +41,43 @@
     // Query to send the updated version of the post back to the database
     if (isset($_POST['submit'])) {
         $post_category_id = $_POST['post_category_id'];
+        $post_title = $_POST['post_title'];
+        $post_author = $_POST['post_author'];
+        $post_content = $_POST['post_content'];
+        $post_tags = $_POST['post_tags'];
+        $post_status = $_POST['post_status'];
+        $post_users = $_POST['post_users'];
+        
+        
+        
+        $post_image = $_FILES['post_image']['name'];
+        $post_image_temp = $_FILES["post_image"]['tmp_name'];
+        move_uploaded_file($post_image_temp, "../images/$post_image");
+
+        // Incase image input is empty
+        if (empty($post_image)) {
+            $query = "SELECT * FROM posts WHERE post_id = $get_post_id";
+            $query_result = mysqli_query($connection, $query);
+
+            while ($row = mysqli_fetch_assoc($query_result)) {
+                $post_image = $row['post_image'];
+            }
+        }
+
+
+        if (empty($post_category_id) || empty($post_title) || empty($post_author) || empty($post_content) || empty($post_tags) || empty($post_status) || empty($post_users)) {
+            echo "<h3 class='text-center'>Field can't be empty</h3>";
+        }else{
+
+        }
+        
     }
     
     
     
     
-    ?>
+    
+?>
 
 
 
@@ -83,7 +114,7 @@
 
     <div class="form-group">
         <label for="post_author">Post Author</label>
-        <input value="<?php echo $post_author;?>" type="text" class="form-control" name="post_users">
+        <input value="<?php echo $post_author?>" type="text" class="form-control" name="post_author" readonly>
     </div>
 
     <div class="form-group">
@@ -118,7 +149,7 @@
 
     <div class="form-group">
         <label for="post_users">Post User</label>
-        <input value="<?php echo $post_users;?>"type="text" class="form-control" name="post_tags">
+        <input value="<?php echo $post_users;?>"type="text" class="form-control" name="post_users">
     </div>
 
     <div class="form-group">
