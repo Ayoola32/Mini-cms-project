@@ -48,9 +48,9 @@
                     echo "<td><a href='../post_comment.php?p_id={$post_id}'>$post_title</a></td>";
                 }
                 echo "<td>{$comment_date}</td>";
-                echo "<td><a href='comments.php?approve={$comment_id}'>Approve</a></td>";
-                echo "<td><a href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
-                echo "<td><a href='comments.php?delete={$comment_id}'>Delete</a></td>";
+                echo "<td><a href='comment.php?approve={$comment_id}'>Approve</a></td>";
+                echo "<td><a href='comment.php?unapprove={$comment_id}'>Unapprove</a></td>";
+                echo "<td><a href='comment.php?delete={$comment_id}'>Delete</a></td>";
                 echo "</td>";
             } 
         
@@ -63,7 +63,7 @@
 
                     $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $approve_comment_id";
                     $comment_approve_result = mysqli_query($connection, $query);
-                    header("Location: comments.php");
+                    header("Location: comment.php");
             }
 
             // UNAPPROVE BUTTON
@@ -72,7 +72,7 @@
 
                     $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $approve_comment_id";
                     $comment_unapprove_result = mysqli_query($connection, $query);
-                    header("Location: comments.php");
+                    header("Location: comment.php");
             }
 
 

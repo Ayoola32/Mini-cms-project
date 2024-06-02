@@ -103,7 +103,7 @@
                
                 <!-- Posted Comments -->
                 <?php
-                    $query = "SELECT * FROM comments WHERE comment_post_id = {$post_id_get} ORDER BY comment_id DESC";
+                    $query = "SELECT * FROM comments WHERE comment_post_id = {$post_id_get} AND comment_status = 'Approved' ORDER BY comment_id DESC";
                     $comment_display_result= mysqli_query($connection, $query);
 
                     if (!$comment_display_result) {
