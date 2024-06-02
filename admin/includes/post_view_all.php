@@ -78,7 +78,20 @@
                             <td>image.img</td>
                             <td>Content Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias eum vero repudiandae neque fuga iure!</td>
                             <td>php, fundamental</td>
-                            <td>draft</td>
+                            <td>Draft
+                                <?php
+                                // if (isset($_POST['status'])) {
+                                //    echo $_POST['status'];
+                                // }
+                                
+                                ?>
+                                <!-- <form action="" method="post">
+                                    <select name="status" id="">
+                                        <option value="1">Draft</option>
+                                        <option value="2">Published</option>
+                                    </select>
+                                </form> -->
+                            </td>
                             <td>1</td>
                             <td>user</td>
                             <td>view post</td>
