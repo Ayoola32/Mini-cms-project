@@ -55,6 +55,28 @@
             } 
         
 
+
+
+            // APPROVE BUTTON
+            if (isset($_GET['approve'])) {
+                    $approve_comment_id = $_GET['approve'];
+
+                    $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $approve_comment_id";
+                    $comment_approve_result = mysqli_query($connection, $query);
+                    header("Location: comments.php");
+            }
+
+            // UNAPPROVE BUTTON
+            if (isset($_GET['unapprove'])) {
+                    $approve_comment_id = $_GET['unapprove'];
+
+                    $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $approve_comment_id";
+                    $comment_unapprove_result = mysqli_query($connection, $query);
+                    header("Location: comments.php");
+            }
+
+
+
         ?>
         
     </tbody>
