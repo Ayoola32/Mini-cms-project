@@ -26,7 +26,7 @@
                             $post_author = $row['post_author'];
                             $post_date = $row['post_date'];
                             $post_image = $row['post_image'];
-                            $post_content = substr($row['post_content'], 0, 300);
+                            $post_content = $row['post_content'];
                 ?>
                     <!-- Display each post -->
                     <h1 class="page-header">
@@ -90,19 +90,6 @@
                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                     </div>
                 </div>
-
-
-
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
-        
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
