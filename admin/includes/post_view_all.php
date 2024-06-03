@@ -62,7 +62,7 @@
                             echo "<td>$post_status</td>";
                             echo "<td>$post_comment_count</td>";
                             echo "<td>$post_users</td>";
-                            echo "<td><a href=''>View Post</a></td>";
+                            echo "<td><a href='../post_comment.php?p_id={$post_id}'>View Post</a></td>";
                             echo "<td><a href='./posts.php?source=post_update&p_id={$post_id}'>Edit</a></td>";
                             echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this Post')\" href='./posts.php?source=post_delete&p_id={$post_id}'>Delete</a></td>";
                         }
