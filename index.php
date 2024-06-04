@@ -10,7 +10,7 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php
-                    $query = "SELECT * FROM posts ORDER BY post_id DESC ";
+                    $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC ";
                     $query_post_result = mysqli_query($connection, $query);
                     if (!$query_post_result) {
                         die("Query Failed" . mysqli_error($connection));

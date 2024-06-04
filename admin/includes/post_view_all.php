@@ -59,10 +59,38 @@
                             echo "<td><img class= '' width= '150' src='../images/$post_image' alt='image'></td>";
                             echo "<td>$post_content</td>";
                             echo "<td>$post_tags</td>";
-                            echo "<td>$post_status</td>";
+                            // echo "<td>$post_status</td>";
+
+                        ?>
+                            <td>
+                                <?php
+                                if (isset($_POST['status'])) {
+                                    $status = $_POST['status'];
+
+                                    $query = "UPDATE posts SET post_status = '{$status}' WHERE post_id = {$post_id}";
+                                    $query_result = mysqli_query($connection, $query);
+                                    if (!$query_result) {
+                                        die("Query Failed: " . mysqli_error($connection));
+                                    }
+                                }
+                                
+                                ?>
+                                 <form action="" method="post">
+                                    <select name="status" id="statusSelect" onchange="this.form.submit()">
+                                        <option value=''><?php echo ucwords($post_status); ?></option>
+                                        <?php
+                                        if ($post_status == 'published') {
+                                            echo "<option value='draft'>Draft</option>";
+                                        } else {
+                                            echo "<option value='published'>Published</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </form>
+                            </td>
 
 
-
+                        <?php
                             // Display comment count using num_rows to count the total number of comments made in respect to the post using the post_id
                             $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
                             $query_comment_count_result = mysqli_query($connection, $query);
@@ -89,19 +117,19 @@
                             <td>image.img</td>
                             <td>Content Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias eum vero repudiandae neque fuga iure!</td>
                             <td>php, fundamental</td>
-                            <td>Draft
+                            <td>
                                 <?php
                                 // if (isset($_POST['status'])) {
                                 //    echo $_POST['status'];
                                 // }
                                 
                                 ?>
-                                <!-- <form action="" method="post">
+                                <form action="" method="post">
                                     <select name="status" id="">
                                         <option value="1">Draft</option>
                                         <option value="2">Published</option>
                                     </select>
-                                </form> -->
+                                </form>
                             </td>
                             <td>1</td>
                             <td>user</td>
@@ -111,3 +139,14 @@
                         </tr>
                     </tbody>
                 </table>
+
+
+<!-- Script to handle the post staus select options  -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var statusSelect = document.getElementById('statusDictionary');
+    statusSelect.addEventListener('change', function () {
+        this.form.submit();
+    });
+});
+</script>
