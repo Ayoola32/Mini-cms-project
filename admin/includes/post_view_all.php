@@ -60,7 +60,18 @@
                             echo "<td>$post_content</td>";
                             echo "<td>$post_tags</td>";
                             echo "<td>$post_status</td>";
-                            echo "<td>$post_comment_count</td>";
+
+
+
+                            // Display comment count using num_rows to count the total number of comments made in respect to the post using the post_id
+                            $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
+                            $query_comment_count_result = mysqli_query($connection, $query);
+                            $count_comments = mysqli_num_rows($query_comment_count_result);
+
+                            echo "<td><a href='./comment_list.php?p_id={$post_id}'>{$count_comments}</a></td>";
+
+
+
                             echo "<td>$post_users</td>";
                             echo "<td><a href='../post_comment.php?p_id={$post_id}'>View Post</a></td>";
                             echo "<td><a href='./posts.php?source=post_update&p_id={$post_id}'>Edit</a></td>";
