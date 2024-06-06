@@ -39,11 +39,11 @@
                             include "includes/user_add.php";
                             break;
 
-                        case 'post_update':
+                        case 'user_update':
                             include "includes/user_update.php";
                             break;
 
-                        case 'post_delete':
+                        case 'user_delete':
                             include "includes/user_delete.php";
                             break;
 

@@ -42,7 +42,7 @@
                 echo "<td>{$user_role}</td>";
                 echo "<td><img class= '' width= '50' src='../images/$user_image' alt='image'></td>";
                 echo "<td><a href=''>Edit</a></td>";
-                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this Users Account?')\" href='users.php?source=user_delete={$user_id}'>Delete</a></td>";
+                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this Users Account?')\" href='users.php?source=user_delete&user_id={$user_id}'>Delete</a></td>";
                 echo "</td>";
             } 
         
