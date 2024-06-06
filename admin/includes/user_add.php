@@ -19,9 +19,28 @@ if (isset($_POST['submit'])) {
     $user_password = password_hash($user_password, PASSWORD_BCRYPT, array($randSalt => 10 ));
 
 
+    //Fetch username from database
+    $query = "SELECT username FROM users WHERE username = '{$username}'";
+    $db_query_username = mysqli_query($connection, $query);
+    if (!$db_query_username) {
+        die("Query Failed" . mysqli_error($connection));
+    }
+
+
+    // Fetch email form database
+    $query = "SELECT user_email FROM users WHERE user_email = '{$user_email}'";
+    $db_query_user_email = mysqli_query($connection, $query);
+    if (!$db_query_user_email) {
+        die("Query Failed" . mysqli_error($connection));
+    }
+
+
+
     // FORM VALIDATION USING PREPARE STATMENT
     if (empty($user_firstname &&  $user_lastname && $username && $user_email && $user_password && $user_image)) {
         echo "<h3>Field can't be empty</h3>";
+    }elseif (mysqli_num_rows($db_query_user_email)>0 || mysqli_num_rows($db_query_username)>0){
+        echo "<h4 class=''>Details has been taken</h4>";
     }else{
         $query = "INSERT INTO users(user_firstname, user_lastname, username, user_email, `password`, user_role, user_image, user_date_created) ";
         $query .= "VALUE (?, ?, ?, ?, ?, ?, ?, NOW())";
