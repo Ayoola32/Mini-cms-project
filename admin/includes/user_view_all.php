@@ -40,9 +40,9 @@
                 echo "<td>{$user_lastname}</td>";
                 echo "<td>{$user_email}</td>";
                 echo "<td>{$user_role}</td>";
-                echo "<td><img class= '' width= '50' src='' alt='image'></td>";
+                echo "<td><img class= '' width= '50' src='../images/$user_image' alt='image'></td>";
                 echo "<td><a href=''>Edit</a></td>";
-                echo "<td><a href=''>Delete</a></td>";
+                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this Users Account?')\" href='users.php?source=user_delete={$user_id}'>Delete</a></td>";
                 echo "</td>";
             } 
         
