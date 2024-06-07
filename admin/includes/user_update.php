@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     $user_lastname = $_POST['user_lastname'];
     $username = $_POST['username'];
     $user_email = $_POST['user_email'];
-    $user_password = $_POST['password'];
+    // $user_password = $_POST['password'];
     $user_role = $_POST['user_role'];
     
     $user_image = $_FILES['user_image']['name'];
@@ -47,8 +47,8 @@ if (isset($_POST['submit'])) {
     }
     
     //Advance Hash Password
-    $randSalt = "alwayskeepchaseYOURgreatness2024tilleternity";
-    $user_password = password_hash($user_password, PASSWORD_BCRYPT, array($randSalt => 10 ));
+    // $randSalt = "alwayskeepchaseYOURgreatness2024tilleternity";
+    // $user_password = password_hash($user_password, PASSWORD_BCRYPT, array($randSalt => 10 ));
     
     
     //Fetch username from database
@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
     
     
     
-    if (empty($user_firstname) || empty($user_lastname) || empty($username) || empty($user_email) || empty($user_password) || empty($user_image)) {
+    if (empty($user_firstname) || empty($user_lastname) || empty($username) || empty($user_email) || empty($user_image)) {
         echo "<h3>Field can't be empty</h3>";
     }elseif (mysqli_num_rows($db_query_user_email)>1 || mysqli_num_rows($db_query_username)>1){
         echo "<h4 class=''>Details has been taken</h4>";
@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
         
         $query = "UPDATE users SET ";
         $query .= "username = '{$username}', ";
-        $query .= "password = '{$user_password}', ";
+        // $query .= "password = '{$user_password}', ";
         $query .= "user_firstname = '{$user_firstname}', ";
         $query .= "user_lastname = '{$user_lastname}', ";
         $query .= "user_email = '{$user_email}', ";
@@ -122,11 +122,12 @@ if (isset($_POST['submit'])) {
         <label for="user_email">Email</label>
         <input value="<?php echo $user_email?>" type="email" class="form-control" name="user_email">
     </div>
-
+    
+<!-- 
     <div class="form-group">
         <label for="password">Password</label>
         <input autocomplete="off" type="password" class="form-control" name="password">
-    </div>
+    </div> -->
 
     <div class="form-group">
         <select name="user_role" id="">
