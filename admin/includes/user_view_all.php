@@ -67,8 +67,8 @@ if (isset($_POST['role']) && isset($_POST['user_id'])) {
 
             <?php
                 echo "<td><img class='' width='50' src='../images/{$row['user_image']}' alt='image'></td>";
-                echo "<td><a href='./users.php?source=user_update&user_id={$row['user_id']}'>Edit</a></td>";
-                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this Users Account?')\" href='users.php?source=user_delete&user_id={$row['user_id']}'>Delete</a></td>";
+                echo "<td><a class='btn btn-info' href='./users.php?source=user_update&user_id={$row['user_id']}'>Edit</a></td>";
+                echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete this Users Account?')\" href='users.php?source=user_delete&user_id={$row['user_id']}'>Delete</a></td>";
                 echo "</td>";
             } 
         
