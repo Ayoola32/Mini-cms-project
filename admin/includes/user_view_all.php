@@ -14,7 +14,7 @@ if (isset($_POST['role']) && isset($_POST['user_id'])) {
 
 
 
-<table class="table table-bordered hovered table-hover">
+<table class="table table-bordered hovered table-hover table-striped">
     <thead>
         <tr>
             <th>Id</th>

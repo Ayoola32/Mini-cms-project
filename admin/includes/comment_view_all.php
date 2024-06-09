@@ -1,4 +1,4 @@
-<table class="table table-bordered hovered table-hover">
+<table class="table table-bordered hovered table-hover table-striped">
     <thead>
         <tr>
             <th>Id</th>

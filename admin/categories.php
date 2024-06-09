@@ -53,7 +53,7 @@
                 </div> <!-- Category form -->
 
                 <div class="col-xs-6">
-                    <table class="table table-bordered hovered table-hover">
+                    <table class="table table-bordered hovered table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>Id</th>

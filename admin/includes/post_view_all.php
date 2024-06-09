@@ -12,7 +12,7 @@ if (isset($_POST['status']) && isset($_POST['post_id'])) {
 }
 ?>
 
-<table class="table table-bordered hovered table-hover">
+<table class="table table-bordered hovered table-hover table-striped">
     <thead>
         <tr>
             <th>Id</th>
