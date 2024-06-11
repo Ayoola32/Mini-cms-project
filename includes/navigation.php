@@ -34,10 +34,17 @@
 
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="./login.php">Login</a></li>
-                    <li><a href="admin">Admin</a></li>
-                </ul>
+                <!-- Dont display admin if not logged in -->
+                <?php if (isset($_SESSION['user_role'])): ?>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="admin">Admin</a></li>
+                    </ul>
+                    <?php else: ?>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="./includes/login.php">Login</a></li>
+                        </ul>
+                    <?php endif; ?>
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
