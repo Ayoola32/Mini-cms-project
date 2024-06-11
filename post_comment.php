@@ -137,7 +137,7 @@
             <div class="col-md-4">
 
                 
-                <?php include "includes/sidebar.php"?>
+                <?php include "includes/sidebar_post.php"?>
             </div>
 
         </div>
