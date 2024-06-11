@@ -2,6 +2,16 @@
 <?php include "./function.php";?>
 
 <?php ob_start();?>
+<?php session_start();?>
+
+<!-- Kick back user trying to loging into the admin page while they're not an admin -->
+<?php
+if (!isset($_SESSION['user_role'])) {
+    header("Location: ../index.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

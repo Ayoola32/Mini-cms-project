@@ -15,27 +15,33 @@
 </div>
 
 <div class="well">
+    <?php if (isset($_SESSION['user_role'])): ?>
+        <h3>Logged in as <?php echo $_SESSION['username'];?> </h3>
+        <a href="./includes/logout.php" class="btn btn-primary">Logout</a>
+    <?php else: ?>
 
-    <h4>Login</h4>
-    <form action="./includes/login.php" method ="post">
-        <div class="form-group">
-            <input type="text" name="username"class="form-control" placeholder="Enterr Username">
-        </div>
-        
-        <div class="input-group">
-            <input type="password" name="password"class="form-control" placeholder="Enter Password">
-            <span class="input-group-btn">
-                <button name = "submit" class="btn btn-primary" type="submit">
-                    Submit
-                </button>
-            </span>
-        </div>
-        
-        <div class="form-group">
-            <a href="">Forgot Password</a>
-        </div>
-        
-    </form> <!--Login form -->
+        <h4>Login</h4>
+        <form action="./includes/login.php" method ="post">
+            <div class="form-group">
+                <input type="text" name="username"class="form-control" placeholder="Enterr Username">
+            </div>
+            
+            <div class="input-group">
+                <input type="password" name="password"class="form-control" placeholder="Enter Password">
+                <span class="input-group-btn">
+                    <button name = "submit" class="btn btn-primary" type="submit">
+                        Submit
+                    </button>
+                </span>
+            </div>
+            
+            <div class="form-group">
+                <a href="">Forgot Password</a>
+            </div>
+            
+        </form> <!--Login form -->
+
+    <?php endif; ?>
 </div>
 
 
