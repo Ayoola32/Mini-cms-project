@@ -1,4 +1,5 @@
 <?php include "db.php"?>
+<?php session_start();?>
 
 
 <?php
@@ -27,6 +28,23 @@ if (isset($_POST['submit'])) {
         $db_user_firstname = $row['user_firstname'];
         $db_user_lastname = $row['user_lastname'];
         $db_user_role = $row['user_role'];
+
+        if (password_verify($password, $db_user_password)) {
+            $_SESSION['username'] = $db_username;
+            $_SESSION['user_firstname'] = $db_user_firstname;
+            $_SESSION['user_lastname'] = $db_user_lastname;
+            $_SESSION['user_email'] = $db_user_email;
+            $_SESSION['user_role'] = $db_user_role;
+    
+            header("Location: ../admin/index.php");
+            exit;
+        }else {
+            header("Location: ../index.php");
+            exit;
+        }
+    }else {
+        header("Location: ../index.php");
+        exit;
     }
 
 }
