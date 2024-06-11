@@ -23,7 +23,7 @@ if (isset($_GET['p_id'])) {
                 <div class="col-lg-12">
                     <h1 class="page-header">
                        Post Comments Page
-                        <small>Username</small>
+                        <small><?php echo $_SESSION['username'];?></small>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
