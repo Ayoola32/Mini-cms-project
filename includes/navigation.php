@@ -41,7 +41,8 @@
                     </ul>
                     <?php else: ?>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="./includes/login.php">Login</a></li>
+                            <li><a href="./login.php">Signin</a></li>
+                            <li><a href="./registration.php">Signup</a></li>
                         </ul>
                     <?php endif; ?>
 

@@ -25,7 +25,7 @@
 							<div class="panel-body">
 
 
-								<form action="includes/login.php" id="login-form" role="form" autocomplete="off" class="form" method="post">
+								<form action="./includes/login.php" id="login-form" role="form" autocomplete="off" class="form" method="post">
 
 									<div class="form-group">
 										<div class="input-group">
