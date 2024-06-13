@@ -36,6 +36,12 @@
                                 <h2><a href=""><?php echo $post_title ?></a></h2>
                                 <p class="lead">by <a href=""><?php echo $post_author ?></a></p>
                                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
+                                <?php
+                                    if (isset($_SESSION['user_role'])) {
+                                    echo "<span><a href='admin/posts.php?source=post_update&p_id={$post_id}'>Edit Post</a></span>";
+                                    }
+                                ?>   
+                                <hr>
                                 <a href=""><img class="img-responsive" src="images/<?php echo $post_image?>" alt=""></a><br>
                                 <p><?php echo $post_content ?></p>
                                 <hr>

@@ -94,7 +94,7 @@
 
     <div class="form-group">
         <label for="post_users">Post User</label>
-        <input type="text" class="form-control" name="post_users">
+        <input value="<?php echo $_SESSION['username']?>" type="text" class="form-control" name="post_users">
     </div>
 
     <div class="form-group">

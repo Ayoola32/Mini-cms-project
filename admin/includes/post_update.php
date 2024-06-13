@@ -131,7 +131,7 @@
 
     <div class="form-group">
         <label for="post_author">Post Author</label>
-        <input value="<?php echo $post_author?>" type="text" class="form-control" name="post_author" readonly>
+        <input value="<?php echo $post_author?>" type="text" class="form-control" name="post_author">
     </div>
 
     <div class="form-group">
@@ -166,7 +166,7 @@
 
     <div class="form-group">
         <label for="post_users">Post User</label>
-        <input value="<?php echo $post_users;?>"type="text" class="form-control" name="post_users">
+        <input value="<?php echo $post_users;?>"type="text" class="form-control" name="post_users" readonly>
     </div>
 
     <div class="form-group">
