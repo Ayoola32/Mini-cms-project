@@ -18,13 +18,9 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="text-center">
-
-
-							<h3><i class="fa fa-user fa-4x"></i></h3>
 							<h2 class="text-center">Login</h2>
+
 							<div class="panel-body">
-
-
 								<form action="./includes/login.php" id="login-form" role="form" autocomplete="off" class="form" method="post">
 
 									<div class="form-group">
@@ -50,9 +46,6 @@
 									<div class="form-group">
 										<a href="" class="text-center">Forgot Password</a>
 									</div>
-
-
-
 								</form>
 
 							</div><!-- Body-->
