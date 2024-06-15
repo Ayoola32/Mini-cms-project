@@ -13,8 +13,39 @@ if (isset($_POST['status']) && isset($_POST['post_id'])) {
 ?>
 
 <table class="table table-bordered hovered table-hover table-striped">
+
+    <div class="bulkOptionsContainer row">
+        <div class="col-xs-2">
+            <select class="form-control" name="bulk_options" id="">
+                <option value="">Select Options</option>
+                <option value="published">Publish</option>
+                <option value="draft">Draft</option>
+                <option value="clone">Clone</option>
+                <option value="delete">Delete</option>
+            </select>
+        </div>
+
+        <div class="col-xs-3">
+            <div class="row">
+                <div class="col-xs-5">
+                    <input type="submit" name="submit" class="btn btn-success btn-block" value="Apply">
+                </div>
+                <div class="col-xs-5">
+                    <a class="btn btn-primary btn-block" href="posts.php?source=post_add">Add New Post</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+
+
+
+
+
     <thead>
         <tr>
+            <th><input type="checkbox" name="" id="selectAllboxes"></th>
             <th>Id</th>
             <th>Category</th>
             <th>Title</th>
@@ -42,6 +73,11 @@ if (isset($_POST['status']) && isset($_POST['post_id'])) {
         }
         while ($row = mysqli_fetch_assoc($query_post_result)) {
             echo "<tr>";
+            ?>
+
+            <td><input class='checkBoxes' type='checkbox' id='checkAllboxes' name='checkBoxArr[]' value='<?php echo $post_id?>'></td>
+            
+            <?php
             echo "<td>{$row['post_id']}</td>";
 
             // Display Post category title instead of post category id
