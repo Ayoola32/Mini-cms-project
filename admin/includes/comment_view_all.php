@@ -59,30 +59,33 @@
 
             // APPROVE BUTTON
             if (isset($_GET['approve'])) {
-                    $approve_comment_id = $_GET['approve'];
+            $approve_comment_id = $_GET['approve'];
 
-                    $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $approve_comment_id";
-                    $comment_approve_result = mysqli_query($connection, $query);
-                    header("Location: comments.php");
+            $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $approve_comment_id";
+            $comment_approve_result = mysqli_query($connection, $query);
+            header("Location: comments.php");
+            exit();
             }
-
+            
             // UNAPPROVE BUTTON
             if (isset($_GET['unapprove'])) {
-                    $approve_comment_id = $_GET['unapprove'];
-
-                    $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $approve_comment_id";
-                    $comment_unapprove_result = mysqli_query($connection, $query);
-                    header("Location: comments.php");
+                $approve_comment_id = $_GET['unapprove'];
+                
+                $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $approve_comment_id";
+                $comment_unapprove_result = mysqli_query($connection, $query);
+                header("Location: comments.php");
+                exit();
             }
-
-
+                
+                
             // DELETE BUTTON
             if (isset($_GET['delete'])) {
                 $del_comment_id = $_GET['delete'];
-
+                
                 $query = "DELETE FROM comments WHERE comment_id = '{$del_comment_id}'";
                 $query_result = mysqli_query($connection, $query);
                 header("Location: comments.php");
+                exit();
             }
 
 
