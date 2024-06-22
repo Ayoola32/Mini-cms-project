@@ -6,7 +6,6 @@ if (isset($_POST['checkBoxArr'])) {
 
         switch ($bulk_options) {
             case 'published':
-            case 'draft':
                 $query = "UPDATE posts SET post_status = ? WHERE post_id = ?";
                 $query_published_result = mysqli_prepare($connection, $query);
                 mysqli_stmt_bind_param($query_published_result, 'si', $bulk_options, $checkBoxValue);
@@ -14,6 +13,16 @@ if (isset($_POST['checkBoxArr'])) {
                     die("Query Failed:" . mysqli_error($connection));
                 }
                 mysqli_stmt_close($query_published_result);
+                break;
+                
+            case 'draft':
+                $query = "UPDATE posts SET post_status = ? WHERE post_id = ?";
+                $query_draft_result = mysqli_prepare($connection, $query);
+                mysqli_stmt_bind_param($query_draft_result, 'si', $bulk_options, $checkBoxValue);
+                if (!mysqli_stmt_execute($query_draft_result)) {
+                    die("Query Failed:" . mysqli_error($connection));
+                }
+                mysqli_stmt_close($query_draft_result);
                 break;
 
             case 'clone':
