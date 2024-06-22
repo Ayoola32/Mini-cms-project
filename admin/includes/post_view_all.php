@@ -79,6 +79,8 @@ if (isset($_POST['checkBoxArr'])) {
 }
 ?>
 
+
+
 <?php
 // for post status update
 if (isset($_POST['status']) && isset($_POST['post_id'])) {
@@ -92,8 +94,13 @@ if (isset($_POST['status']) && isset($_POST['post_id'])) {
         die("Query Failed: " . mysqli_error($connection));
     }
     mysqli_stmt_close($stmt);
+
+    header("Location: ".$_SERVER['PHP_SELF']); // Refresh the current page
+    exit;
 }
 ?>
+
+
 
 <form action="" method="post">
     <table class="table table-bordered hovered table-hover table-striped">
@@ -149,13 +156,12 @@ if (isset($_POST['status']) && isset($_POST['post_id'])) {
                 die("Query Failed" . mysqli_error($connection));
             }
             while ($row = mysqli_fetch_assoc($query_post_result)) {
+                $post_id = $row['post_id'];
                 echo "<tr>";
                 ?>
-
-                <td><input class='checkBoxes' type='checkbox' id='checkAllboxes' name='checkBoxArr[]' value='<?php echo $row['post_id'] ?>'></td>
-
+                <td><input class='checkBoxes' type='checkbox' id='checkAllboxes' name='checkBoxArr[]' value='<?php echo $post_id ?>'></td>
                 <?php
-                echo "<td>{$row['post_id']}</td>";
+                echo "<td>{$post_id}</td>";
 
                 // Display Post category title instead of post category id
                 $query_cat = "SELECT cat_title FROM category_header WHERE cat_id = {$row['post_category_id']}";
@@ -182,20 +188,19 @@ if (isset($_POST['status']) && isset($_POST['post_id'])) {
                             }
                             ?>
                         </select>
-                        <input type="hidden" name="post_id" value="<?php echo $row['post_id']; ?>">
+                        <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                     </form>
                 </td>
                 <?php
-                // Comment count
-                $query_comments = "SELECT * FROM comments WHERE comment_post_id = {$row['post_id']}";
+                $query_comments = "SELECT * FROM comments WHERE comment_post_id = {$post_id}";
                 $query_comments_result = mysqli_query($connection, $query_comments);
                 $count_comments = mysqli_num_rows($query_comments_result);
 
-                echo "<td><a href='./comment_list.php?p_id={$row['post_id']}'>{$count_comments}</a></td>";
+                echo "<td><a href='./comment_list.php?p_id={$post_id}'>{$count_comments}</a></td>";
                 echo "<td>{$row['post_users']}</td>";
-                echo "<td><a class='btn btn-warning' href='../post_comment.php?p_id={$row['post_id']}'>View Post</a></td>";
-                echo "<td><a class='btn btn-info mr-2' href='./posts.php?source=post_update&p_id={$row['post_id']}'>Edit</a></td>";
-                echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete this Post')\" href='./posts.php?source=post_delete&p_id={$row['post_id']}'>Delete</a></td>";
+                echo "<td><a class='btn btn-warning' href='../post_comment.php?p_id={$post_id}'>View Post</a></td>";
+                echo "<td><a class='btn btn-info mr-2' href='./posts.php?source=post_update&p_id={$post_id}'>Edit</a></td>";
+                echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete this Post')\" href='./posts.php?source=post_delete&p_id={$post_id}'>Delete</a></td>";
                 echo "</tr>";
             }
             ?>
