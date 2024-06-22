@@ -8,24 +8,24 @@ if (isset($_POST['checkBoxArr'])) {
             case 'published':
             case 'draft':
                 $query = "UPDATE posts SET post_status = ? WHERE post_id = ?";
-                $stmt = mysqli_prepare($connection, $query);
-                mysqli_stmt_bind_param($stmt, 'si', $bulk_options, $checkBoxValue);
-                if (!mysqli_stmt_execute($stmt)) {
+                $query_published_result = mysqli_prepare($connection, $query);
+                mysqli_stmt_bind_param($query_published_result, 'si', $bulk_options, $checkBoxValue);
+                if (!mysqli_stmt_execute($query_published_result)) {
                     die("Query Failed:" . mysqli_error($connection));
                 }
-                mysqli_stmt_close($stmt);
+                mysqli_stmt_close($query_published_result);
                 break;
 
             case 'clone':
                 $query = "SELECT * FROM posts WHERE post_id = ?";
-                $stmt = mysqli_prepare($connection, $query);
-                mysqli_stmt_bind_param($stmt, 'i', $checkBoxValue);
-                if (!mysqli_stmt_execute($stmt)) {
+                $query_draft_result = mysqli_prepare($connection, $query);
+                mysqli_stmt_bind_param($query_draft_result, 'i', $checkBoxValue);
+                if (!mysqli_stmt_execute($query_draft_result)) {
                     die("Query Failed:" . mysqli_error($connection));
                 }
-                $result = mysqli_stmt_get_result($stmt);
+                $result = mysqli_stmt_get_result($query_draft_result);
                 $row = mysqli_fetch_assoc($result);
-                mysqli_stmt_close($stmt); // Close the statement after fetching the result
+                mysqli_stmt_close($query_draft_result); // Close the statement after fetching the result
 
                 if ($row) {
                     $post_category_id = $row['post_category_id'];
@@ -41,13 +41,13 @@ if (isset($_POST['checkBoxArr'])) {
 
                     $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_content, post_tags, post_status, post_image, post_users, post_comment_count, post_date) ";
                     $query .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-                    $stmt = mysqli_prepare($connection, $query);
-                    mysqli_stmt_bind_param($stmt, "isssssssi", $post_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_image, $post_users, $post_comment_count);
+                    $query_clone_result = mysqli_prepare($connection, $query);
+                    mysqli_stmt_bind_param($query_clone_result, "isssssssi", $post_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_image, $post_users, $post_comment_count);
 
-                    if (!mysqli_stmt_execute($stmt)) {
+                    if (!mysqli_stmt_execute($query_clone_result)) {
                         die("Query Failed: " . mysqli_error($connection));
                     }
-                    mysqli_stmt_close($stmt);
+                    mysqli_stmt_close($query_clone_result);
                 } else {
                     die("Query Failed: No post found with the given ID");
                 }
