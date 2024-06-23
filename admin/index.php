@@ -146,6 +146,85 @@
                 </div>
                 <!-- /.row -->
 
+                    <?php
+                    $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                    $post_published_query_result = mysqli_query($connection, $query);
+                    $post_published_count = mysqli_num_rows($post_published_query_result);
+                    ?>
+
+                    <?php
+                    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+                    $post_draft_query_result = mysqli_query($connection, $query);
+                    $post_draft_count = mysqli_num_rows($post_draft_query_result);
+                    ?>
+
+                    <?php
+                    $query = "SELECT * FROM comments WHERE comment_status = 'approved'";
+                    $comment_approve_result = mysqli_query($connection, $query);
+                    $approve_comment_count = mysqli_num_rows($comment_approve_result);
+                    ?>
+
+                    <?php
+                    $query = "SELECT * FROM comments WHERE comment_status = 'Unapproved'";
+                    $comment_unapprove_result = mysqli_query($connection, $query);
+                    $unapprove_comment_count = mysqli_num_rows($comment_unapprove_result);
+                    ?>
+
+                    <?php
+                    $query = "SELECT * FROM users WHERE user_role = 'admin'";
+                    $user_admin_result = mysqli_query($connection, $query);
+                    $user_admin_count = mysqli_num_rows($user_admin_result);
+                    ?>
+
+                    <?php
+                    $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+                    $user_role_result = mysqli_query($connection, $query);
+                    $user_role_count = mysqli_num_rows($user_role_result);
+                    ?>
+
+                    <?php
+                    $query = "SELECT * FROM category_header";
+                    $cat_header_result = mysqli_query($connection, $query);
+                    $categories_count = mysqli_num_rows($cat_header_result);
+                    ?>
+
+                <div class="row">
+                    <script type="text/javascript">
+                        google.charts.load('current', {'packages':['bar']});
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                            ['Data', 'Count', {role: 'style'}],
+                            ['All Post', <?php echo $post_count?>, 'blue'],
+                            ['Published Post', <?php echo $post_published_count?>, 'blue'],
+                            ['Drafted Posts', <?php echo $post_draft_count?>, 'red'],
+                            ['All Comments', <?php echo $comment_count?>, 'blue'],
+                            ['Approved Comments', <?php echo $approve_comment_count?>, 'red'],
+                            ['Unapproved Comments', <?php echo $unapprove_comment_count?>, 'red'],
+                            ['All Users', <?php echo $user_count?>, 'blue'],
+                            ['Admin', <?php echo $user_admin_count?>, 'red'],
+                            ['Subscribers', <?php echo $user_role_count?>, 'red'],
+                            ['Categories', <?php echo $categories_count?>, 'blue']                         
+                            ]);
+
+                            var options = {
+                                chart: {
+                                    title: 'TGH Content Rating',
+                                    // subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                                },
+                                legend: { position: 'none' } // Hide legend
+                            };
+
+                            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                            chart.draw(data, google.charts.Bar.convertOptions(options));
+                        }
+                    </script>
+                <div id="columnchart_material" style="width: auto; height: 500px;"></div>
+            </div>
+            <!-- /.row -->
+
             </div>
             <!-- /.container-fluid -->
 
