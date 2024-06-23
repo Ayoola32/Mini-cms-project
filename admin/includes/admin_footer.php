@@ -1,5 +1,5 @@
  <!-- jQuery -->
- <script src="js/jquery.js"></script>
+ <!-- <script src="js/jquery.js"></script> -->
 
  <!-- JSScript -->
  <script src="js/script.js"></script>    
