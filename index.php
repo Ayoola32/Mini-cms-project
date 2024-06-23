@@ -78,21 +78,32 @@
                 <!-- Pager -->
                 <ul class="pager">
                 <?php
-                    for ($i = 1; $i <= $total_pages; $i++) {
-                        // Initialize the class variable
-                        $class = '';  
-                        
-                        // Check if the current loop iteration is the active page
-                        if ($i == $page) {
-                            $class = 'active';  
-                        } else {
-                            $class = ''; 
-                        }
+                   // Set how many adjacent pages should be shown on each side of the current page
+                    $range = 2;
 
-                        // Echo the pagination link with the appropriate class
-                        echo "<li><a href='index.php?page={$i}' class='{$class}'>{$i}</a></li>";
-
+                    // Show previous button if not on the first page
+                    if ($page > 1) {
+                        $prev_page = $page - 1;
+                        echo "<li><a href='index.php?page=$prev_page'>&laquo; Previous</a></li>";
                     }
+
+                    // Determine the first number in the pagination range
+                    $start = ($page - $range > 1) ? $page - $range : 1;
+
+                    // Determine the last number in the pagination range
+                    $end = ($page + $range < $total_pages) ? $page + $range : $total_pages;
+
+                    for ($i = $start; $i <= $end; $i++) {
+                        $class = ($i == $page) ? 'active' : '';  // Current page or not
+                        echo "<li><a href='index.php?page={$i}' class='{$class}'>{$i}</a></li>";
+                    }
+
+                    // Show next button if not on the last page
+                    if ($page < $total_pages) {
+                        $next_page = $page + 1;
+                        echo "<li><a href='index.php?page=$next_page'>Next &raquo;</a></li>";
+                    }
+
                     ?>
                 </ul>
 
