@@ -210,8 +210,8 @@
 
                             var options = {
                                 chart: {
-                                    title: 'TGH Content Rating',
-                                    // subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                                    title: 'Content Rating',
+                                    subtitle: 'Posts, Comments, Users, and Catgeories:',
                                 },
                                 legend: { position: 'none' } // Hide legend
                             };
