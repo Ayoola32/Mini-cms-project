@@ -90,7 +90,7 @@ if (isset($_GET['p_id'])) {
                                 echo "<td>{$comment_date}</td>";
                                 echo "<td><a href='comment_list.php?p_id={$get_post_id}&approve={$comment_id}'>Approve</a></td>";
                                 echo "<td><a href='comment_list.php?p_id={$get_post_id}&unapprove={$comment_id}'>Unapprove</a></td>";
-                                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this Comment')\" href='comments.php?delete={$comment_id}'>Delete</a></td>";
+                                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this Comment')\" href='comment_list.php?delete={$comment_id}&p_id={$get_post_id}'>Delete</a></td>";
                                 echo "</td>";
                             } 
                         
@@ -124,7 +124,8 @@ if (isset($_GET['p_id'])) {
 
                                 $query = "DELETE FROM comments WHERE comment_id = '{$del_comment_id}'";
                                 $query_result = mysqli_query($connection, $query);
-                                // header("Location: comments.php");
+                                header("Location: comment_list.php?p_id={$get_post_id}");
+                                exit();
                             }
 
 
