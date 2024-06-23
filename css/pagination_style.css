@@ -1,0 +1,27 @@
+/* Pagination container styles */
+.pager {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Styles for individual pagination links */
+.pager li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Styles for all pagination links */
+.pager a {
+    text-decoration: none;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: normal;
+    background: none;
+}
+
+/* Styles for the active pagination link */
+.pager a.active {
+    font-weight: bold;
+    background: #f0f0f0;
+}
