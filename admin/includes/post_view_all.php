@@ -13,7 +13,7 @@ if (isset($_POST['checkBoxArr'])) {
                     die("Query Failed:" . mysqli_error($connection));
                 }
                 mysqli_stmt_close($query_published_result);
-                break;
+            break;
                 
             case 'draft':
                 $query = "UPDATE posts SET post_status = ? WHERE post_id = ?";
@@ -23,7 +23,7 @@ if (isset($_POST['checkBoxArr'])) {
                     die("Query Failed:" . mysqli_error($connection));
                 }
                 mysqli_stmt_close($query_draft_result);
-                break;
+            break;
 
             case 'clone':
                 $query = "SELECT * FROM posts WHERE post_id = ?";
@@ -60,17 +60,37 @@ if (isset($_POST['checkBoxArr'])) {
                 } else {
                     die("Query Failed: No post found with the given ID");
                 }
-                break;
+            break;
 
             case 'delete':
-                $query = "DELETE FROM posts WHERE post_id = ?";
-                $stmt = mysqli_prepare($connection, $query);
-                mysqli_stmt_bind_param($stmt, 'i', $checkBoxValue);
-                if (!mysqli_stmt_execute($stmt)) {
-                    die("Query Failed:" . mysqli_error($connection));
+                // $query = "DELETE FROM posts WHERE post_id = ?";
+                // $stmt = mysqli_prepare($connection, $query);
+                // mysqli_stmt_bind_param($stmt, 'i', $checkBoxValue);
+                // if (!mysqli_stmt_execute($stmt)) {
+                //     die("Query Failed:" . mysqli_error($connection));
+                // }
+                // mysqli_stmt_close($stmt);
+                // break;
+
+                // First, delete comments related to the post
+                $delete_comments_query = "DELETE FROM comments WHERE comment_post_id = ?";
+                $stmt_delete_comments = mysqli_prepare($connection, $delete_comments_query);
+                mysqli_stmt_bind_param($stmt_delete_comments, 'i', $checkBoxValue);
+                if (!mysqli_stmt_execute($stmt_delete_comments)) {
+                    die("Query Failed to delete comments:" . mysqli_error($connection));
                 }
-                mysqli_stmt_close($stmt);
+                mysqli_stmt_close($stmt_delete_comments);
+
+                // Then, delete the post itself
+                $delete_post_query = "DELETE FROM posts WHERE post_id = ?";
+                $stmt_delete_post = mysqli_prepare($connection, $delete_post_query);
+                mysqli_stmt_bind_param($stmt_delete_post, 'i', $checkBoxValue);
+                if (!mysqli_stmt_execute($stmt_delete_post)) {
+                    die("Query Failed to delete post:" . mysqli_error($connection));
+                }
+                mysqli_stmt_close($stmt_delete_post);
                 break;
+
 
             default:
                 break;
@@ -200,7 +220,7 @@ if (isset($_POST['status']) && isset($_POST['post_id'])) {
                 echo "<td>{$row['post_users']}</td>";
                 echo "<td><a class='btn btn-warning' href='../post_comment.php?p_id={$post_id}'>View Post</a></td>";
                 echo "<td><a class='btn btn-info mr-2' href='./posts.php?source=post_update&p_id={$post_id}'>Edit</a></td>";
-                echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete this Post')\" href='./posts.php?source=post_delete&p_id={$post_id}'>Delete</a></td>";
+                echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete this Post and all its comments')\" href='./posts.php?source=post_delete&p_id={$post_id}'>Delete</a></td>";
                 echo "</tr>";
             }
             ?>
