@@ -10,7 +10,36 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php
-                    $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC ";
+                    $items_per_page = 5;  // How many posts i want to display per page
+
+                    // Check if a page number is passed in the URL
+                    if (isset($_GET['page'])) {
+                        $page = $_GET['page'];
+                    } else {
+                        $page = 1; 
+                    }
+    
+                    // Calculate the offset for the SQL query based on the current page
+                    if ($page == 1) {
+                        $offset = 0;  
+                    } else {
+                        $offset = ($page - 1) * $items_per_page;  
+                    }
+    
+                    // SQL query to find out the total number of published posts
+                    $post_count_query = "SELECT COUNT(*) FROM posts WHERE post_status = 'published'";
+                    $post_count_result = mysqli_query($connection, $post_count_query);
+                    if ($post_count_result) {
+                        $row = mysqli_fetch_array($post_count_result);
+                        $total_posts = $row[0];
+                        $total_pages = ceil($total_posts / $items_per_page);  
+                    } else {
+                        die("QUERY FAILED: " . mysqli_error($connection)); 
+                    }
+    
+                    // SQL query to fetch the posts to be displayed on the current page
+                    $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $items_per_page OFFSET $offset";
+                    // $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT ";
                     $query_post_result = mysqli_query($connection, $query);
                     if (!$query_post_result) {
                         die("Query Failed" . mysqli_error($connection));
@@ -48,12 +77,23 @@
 
                 <!-- Pager -->
                 <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
+                <?php
+                    for ($i = 1; $i <= $total_pages; $i++) {
+                        // Initialize the class variable
+                        $class = '';  
+                        
+                        // Check if the current loop iteration is the active page
+                        if ($i == $page) {
+                            $class = 'active';  
+                        } else {
+                            $class = ''; 
+                        }
+
+                        // Echo the pagination link with the appropriate class
+                        echo "<li><a href='index.php?page={$i}' class='{$class}'>{$i}</a></li>";
+
+                    }
+                    ?>
                 </ul>
 
             </div>
