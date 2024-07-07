@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 
-
+$message = ""; 
 
 if (isset($_POST["submit"])) {
     $email = $_POST['email'];
@@ -79,9 +79,9 @@ if (isset($_POST["submit"])) {
 
            $mail->send();
             //    To be adjustted
-           $message = "<h4 class= 'alert alert-success text-center'>Password request has been sent, check your mail</h4>";
+           $message = "<h4 class= 'alert alert-success text-center'>Password request has been sent</h4>";
         } catch (Exception $e) {
-            $message = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }else {
         $message = "<h4 class='alert alert-warning text-center'>Wrong Email Address</h4>";

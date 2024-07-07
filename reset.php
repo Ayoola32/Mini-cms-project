@@ -1,6 +1,46 @@
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
 
+<?php
+if (!isset($_GET['email']) && !isset($_GET['token'])) {
+    header("Location: login.php");
+    exit;
+}
+
+// Values get from the mail including token and mail address
+$token = $_GET['token'];
+$email = $_GET['email'];
+
+// PREPARE STATEMENT TO CHECK IF TOKEN EXISTS IN DATABASE
+$query = "SELECT token FROM users WHERE token = ?";
+$query_result = mysqli_prepare($connection, $query);
+if (!$query_result) {
+    die("Prepare failed: " . mysqli_error($connection));
+}
+
+mysqli_stmt_bind_param($query_result, "s", $token);
+
+if (!mysqli_stmt_execute($query_result)) {
+    die("Execute failed: " . mysqli_stmt_error($query_result));
+}
+
+// Bind result variables
+mysqli_stmt_bind_result($query_result, $retrieved_token);
+
+// Check if the token exists
+if (!mysqli_stmt_fetch($query_result)) {
+    echo "No user found with the provided token.";
+    mysqli_stmt_close($query_result);
+    exit;
+}
+
+// Close the statement
+mysqli_stmt_close($query_result);
+
+
+
+?>
+
 <!-- Page Content -->
 <div class="container">
 
