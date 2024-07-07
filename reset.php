@@ -35,12 +35,53 @@ mysqli_stmt_bind_result($query_result, $retrieved_token);
 if (!mysqli_stmt_fetch($query_result)) {
     $message = "No user found with the provided token.";
     mysqli_stmt_close($query_result);
+    header("Location: login.php");
     exit;
 }
 
 // Close the statement
 mysqli_stmt_close($query_result);
 
+
+// 
+// 
+// 
+// SUBMIT BUTTON
+// 
+// 
+// 
+if (isset($_POST['recover-submit'])) {
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    
+    if (empty($password) || empty($confirmPassword)) {
+        $message = "<h4 class='alert alert-warning'> Password can't be empty </h4>";
+    }
+
+    elseif ($password === $confirmPassword) {
+        $hashPassword = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+        
+        // PREPARE STATEMENT TO UPDATE PASSWORD
+        $query = "UPDATE users SET token = '', password = ? WHERE token = ?";
+        $query_result = mysqli_prepare($connection, $query);
+        if (!$query_result) {
+            die("Prepare failed: " . mysqli_error($connection));
+        }
+        
+        mysqli_stmt_bind_param($query_result, "ss", $hashPassword, $token);
+        
+        if (!mysqli_stmt_execute($query_result)) {
+            die("Execute failed: " . mysqli_stmt_error($query_result));
+        }
+        
+        // Close the statement
+        mysqli_stmt_close($query_result);
+        // TO be adjusted(Style)
+        $message = "<h4 class='alert alert-success'> Password reset successfully. <a href='login.php'>Login</a>";
+    } else {
+        $message = "<h4 class='alert alert-danger'> Passwords do not match.</h4>";
+    }
+}
 
 
 ?>
