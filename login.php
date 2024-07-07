@@ -44,7 +44,7 @@
 									</div>
 
 									<div class="form-group">
-										<a href="forgot_password.php?" class="text-center">Forgot Password</a>
+										<a href="forgot_password.php?forgot=<?php echo uniqid(true) ?>" class="text-center">Forgot Password</a>
 									</div>
 								</form>
 
