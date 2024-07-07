@@ -79,7 +79,7 @@ if (isset($_POST["submit"])) {
 
            $mail->send();
             //    To be adjustted
-           $message = "<h4 class= 'alert alert-success text-center'>Password request has been sent</h4>";
+           $message = "<h4 class= 'alert alert-success text-center'>Password request has been sent </br> Check mail inbox </h4>";
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
