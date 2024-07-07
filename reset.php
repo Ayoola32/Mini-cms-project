@@ -7,6 +7,10 @@ if (!isset($_GET['email']) && !isset($_GET['token'])) {
     exit;
 }
 
+
+$message = "";
+
+
 // Values get from the mail including token and mail address
 $token = $_GET['token'];
 $email = $_GET['email'];
@@ -29,7 +33,7 @@ mysqli_stmt_bind_result($query_result, $retrieved_token);
 
 // Check if the token exists
 if (!mysqli_stmt_fetch($query_result)) {
-    echo "No user found with the provided token.";
+    $message = "No user found with the provided token.";
     mysqli_stmt_close($query_result);
     exit;
 }
@@ -51,7 +55,7 @@ mysqli_stmt_close($query_result);
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="text-center">
-
+                                <?php echo $message?>
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
                                 <h2 class="text-center">Reset Password?</h2>
                                 <p>You can reset your password here.</p>
