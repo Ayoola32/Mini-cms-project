@@ -40,11 +40,11 @@ if (isset($_POST['submit'])) {
             header("Location: ../admin/index.php");
             exit;
         }else {
-            header("Location: ../index.php");
+            header("Location: ../login.php");
             exit;
         }
     }else {
-        header("Location: ../index.php");
+        header("Location: ../login.php");
         exit;
     }
 
