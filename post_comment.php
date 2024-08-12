@@ -129,7 +129,8 @@
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading"><?php echo $comment_author;?>
-                                    <small><?php echo $comment_date;?></small>
+                                    <small><?php echo date('F d, Y \a\t g:i A', strtotime($comment_date)); ?></small>
+                                    <small><?php //echo $comment_date;?></small>
                                 </h4>
                                 <?php echo $comment_content;?>
                             </div>
