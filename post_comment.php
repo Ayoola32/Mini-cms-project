@@ -35,7 +35,8 @@
                                 </h1>
                                 <h2><a href=""><?php echo $post_title ?></a></h2>
                                 <p class="lead">by <a href=""><?php echo $post_author ?></a></p>
-                                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
+                                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo date('F d, Y \a\t g:i A', strtotime($post_date)); ?></p>
+
                                 <?php
                                     if (isset($_SESSION['user_role'])) {
                                     echo "<span><a href='admin/posts.php?source=post_update&p_id={$post_id}'>Edit Post</a></span>";
